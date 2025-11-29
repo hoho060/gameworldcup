@@ -26,7 +26,7 @@ passport.use(
   new SteamStrategy(
     {
       returnURL:
-        process.env.RETURN_URL || "http://localhost:3000/auth/steam/return", // 리턴 URL
+        process.env.RETURN_URL || "http://gameworldcup.onrender.com/auth/steam/return", // 리턴 URL
       realm: process.env.REALM_URL || "http://localhost:3000/", // 영역 URL
       apiKey: process.env.STEAM_API_KEY, // Steam API 키 (환경 변수로 설정)
     },
@@ -166,3 +166,4 @@ app.get("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
