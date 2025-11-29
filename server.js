@@ -14,11 +14,12 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET || "your-session-secret", // 세션 비밀키
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    proxy: true,
     cookie: {
       secure: true,
-      secure: process.env.NODE_ENV === "production",
       httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000
     }, // HTTPS 환경에 맞게 설정
   })
 );
@@ -91,12 +92,13 @@ app.get(
         }
       );
 
-      const games = response.data.response.games || [];
+      const games = response.data?.response?.games || [];
 
-      console.log(req.user);
+      console.log("로그인 성공:", user.displayName);
       res.redirect("/profile");
     } catch (error) {
-      console.error("Error fetching games:", error);
+      console.error("Error fetching games:", error.message);
+      res.redirect("/profile");
     }
   }
 );
@@ -168,6 +170,7 @@ app.get("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
 
 
 
