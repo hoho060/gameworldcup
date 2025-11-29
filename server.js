@@ -15,8 +15,9 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
+      secure: true,
       secure: process.env.NODE_ENV === "production",
-      httpOnly: false,
+      httpOnly: true,
     }, // HTTPS 환경에 맞게 설정
   })
 );
@@ -166,6 +167,7 @@ app.get("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
 
 
 
