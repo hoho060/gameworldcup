@@ -6,6 +6,7 @@ const axios = require("axios");
 require("dotenv").config(); // 환경 변수 로드
 
 const app = express();
+app.set("trust proxy", 1);
 const PORT = process.env.PORT || 10000;
 
 // Express 세션 설정
@@ -167,6 +168,7 @@ app.get("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
 
 
 
